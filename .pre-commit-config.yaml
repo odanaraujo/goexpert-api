@@ -21,13 +21,13 @@ repos:
         args:
           - --max-issues-per-linter=0
           - --max-same-issues=0
-          - --config=.code_quality/.golangci.yml
+          - --configs=.code_quality/.golangci.yml
           - --new-from-rev=HEAD~1 # comment this arg if you want to run pre-commit run --all-files
   - repo: local
     hooks:
       - id: resource-generate
         name: Generating resources
-        entry: go-bindata -o src/api/infrastructure/config/resources.go -pkg config resources/...
+        entry: go-bindata -o src/api/infrastructure/configs/resources.go -pkg configs resources/...
         pass_filenames: false
         language: system
         stages: [ push ]
@@ -35,7 +35,7 @@ repos:
     hooks:
       - id: resource-format
         name: Formating resources
-        entry: gofmt -s -w src/api/infrastructure/config/resources.go
+        entry: gofmt -s -w src/api/infrastructure/configs/resources.go
         pass_filenames: false
         language: system
         stages: [ push ]
